@@ -1,6 +1,5 @@
 # Seteando el entorno de trabajo #
 
-----------
 ## Laravel ##
 Necesita tener instalado composer
 
@@ -8,6 +7,35 @@ Instalar Laravel
     
     composer create-project laravel/laravel my_dir --prefer-dist
     
+### Remover el segmento `public` de la url ###
+
+**Solución 1**
+
+Personalmente recomiendo esta solución, aunque en shared hostings puede no ser viable.
+
+Para esto necesitamos crear un alias para nuestro web site.
+
+Primero crear un archivo .conf, en entorno de desarrollo se puede crear en la raiz del sitio. O bien, usando wampserver colocarlo en el directorio alias.
+
+    
+    Alias /mi-web "/path/a/mi/directorio/public"
+    <Directory "/path/a/mi/directorio/public">
+    	Options Indexes FollowSymLinks ExecCGI
+    	AllowOverride all
+    	Order Deny,Allow
+    	Deny from all
+    	Allow from 127.0.0.1
+    	Allow from ::1
+    	Allow from localhost
+    </Directory>
+    
+
+En caso de haber colocado este archivo en la raiz del sitio, debe abrirse el archivo httpd.conf y agregar la linea
+    
+    Include "path/a/mi/archivo/*.conf"
+    
+Para que esto funcione debe reiniciarse el servicio apache.
+
 ### Way generators ###
 
 Para ayudarse en el desarrollo es recomendable instalar los generadores de Jeffrey Way.
@@ -36,16 +64,16 @@ Primero setear el directorio de trabajo para bower, en la carpeta public de la i
 
 En la raiz de la instalación, al nivel del `composer.json`, crear un archivo y llamarlo `.bowerrc`
 
-`
-{
-  "directory": "public/my_components"
-}
-`
+    
+    {
+      "directory": "public/my_components"
+    }
+    
 
 Luego instalar bootstrap con bower
-
-`bower install bootstrap`
-
+    
+    bower install bootstrap
+    
 ## Repositorio Git ##
 
 Luego iniciar el repo Git. Situarse en la raiz del proyecto creado y ejecutar en consola.
