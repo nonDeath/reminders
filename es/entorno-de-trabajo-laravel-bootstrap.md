@@ -5,8 +5,29 @@
 Necesita tener instalado composer
 
 Instalar Laravel
+    
+    composer create-project laravel/laravel my_dir --prefer-dist
+    
+### Way generators ###
 
-`composer create-project laravel/laravel my_dir --prefer-dist`
+Para ayudarse en el desarrollo es recomendable instalar los generadores de Jeffrey Way.
+
+Abrir el archivo `composer.json` y agregar lo siguiente.
+
+    "require-dev": { 
+    	"way-generators": "2.*"
+    }
+
+
+Luego actualizar las dependencias.
+    
+    composer update --dev
+    
+Una vez completada la operación, Abrir `app/config/app.php`, y agregar un item más en el array de Service Providers.
+    
+    'Way\Generators\GeneratorsServiceProvider'
+    
+Referencia de comandos disponibles [https://github.com/JeffreyWay/Laravel-4-Generators](https://github.com/JeffreyWay/Laravel-4-Generators)
 
 ## Bootstrap ##
 Necesita bower, aunque podria instalarse con composer,o bien copiarse los archivos bajados desde el sitio. La ventaja de bower o composer es que se pueden actualizar las dependencias con solo correr un comando desde la consola.
